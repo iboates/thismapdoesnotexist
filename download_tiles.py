@@ -29,8 +29,9 @@ def deg2num(lat_deg, lon_deg, zoom):
     return xtile, ytile
 
 
-def get_tile_indices(lower, upper, left, right):
+def get_tile_indices(bounds, zoom, step):
 
+    left, lower, right, upper = bounds
     tile_indices = set()
     x_coord = left
     y_coord = lower
@@ -141,62 +142,62 @@ def centre_crop_image(img):
     return cropped_img
 
 
-zoom = 16
-m_per_pixel = {  # From https://wiki.openstreetmap.org/wiki/Zoom_levels
-    0: 156412,
-    1: 78206,
-    2: 39103,
-    3: 19551,
-    4: 9776,
-    5: 4888,
-    6: 2444,
-    7: 1222,
-    8: 610.984,
-    9: 305.492,
-    10: 152.746,
-    11: 76.373,
-    12: 38.187,
-    13: 19.093,
-    14: 9.547,
-    15: 4.773,
-    16: 2.387,
-    17: 1.193,
-    18: 0.596,
-    19: 0.298,
-    20: 0.149
-}
-window_length = 1000
-step = 100
-gdf = gpd.GeoDataFrame.from_file("data/de/locations/nordrhein_westfalen_villages_towns.gpkg")
-gdf_len = len(gdf.index)
-
-for i, row in gdf.iterrows():
-
-    feature = row["geometry"]
-
-    # Get tile indices associated with this point
-    lower, upper = feature.y - (window_length / 2), feature.y + (window_length / 2)
-    left, right = feature.x - (window_length / 2), feature.x + (window_length / 2)
-    tile_indices = get_tile_indices(lower, upper, left, right)
-
-    # Clean out working dir
-    try:
-        shutil.rmtree("data/_temp")
-        os.mkdir("data/_temp")
-    except:
-        pass
-
-    # Download all the tiles
-    download_tiles(tile_indices, "data/_temp", zoom)
-
-    # Stich together the tiles
-    stitched_img = stitch_images("data/_temp")
-
-    # Crop the image down to a standard size
-    cropped_img = centre_crop_image(stitched_img)
-
-    cropped_img.save(f"data/de/tiles/{str(i).zfill(9)}.png")
-
-    if i % 100 == 0:
-        print(f"Finished {i}/{gdf_len}.")
+# zoom = 16
+# m_per_pixel = {  # From https://wiki.openstreetmap.org/wiki/Zoom_levels
+#     0: 156412,
+#     1: 78206,
+#     2: 39103,
+#     3: 19551,
+#     4: 9776,
+#     5: 4888,
+#     6: 2444,
+#     7: 1222,
+#     8: 610.984,
+#     9: 305.492,
+#     10: 152.746,
+#     11: 76.373,
+#     12: 38.187,
+#     13: 19.093,
+#     14: 9.547,
+#     15: 4.773,
+#     16: 2.387,
+#     17: 1.193,
+#     18: 0.596,
+#     19: 0.298,
+#     20: 0.149
+# }
+# window_length = 1000
+# step = 100
+# gdf = gpd.GeoDataFrame.from_file("data/de/locations/nordrhein_westfalen_villages_towns.gpkg")
+# gdf_len = len(gdf.index)
+#
+# for i, row in gdf.iterrows():
+#
+#     feature = row["geometry"]
+#
+#     # Get tile indices associated with this point
+#     lower, upper = feature.y - (window_length / 2), feature.y + (window_length / 2)
+#     left, right = feature.x - (window_length / 2), feature.x + (window_length / 2)
+#     tile_indices = get_tile_indices(lower, upper, left, right)
+#
+#     # Clean out working dir
+#     try:
+#         shutil.rmtree("data/_temp")
+#         os.mkdir("data/_temp")
+#     except:
+#         pass
+#
+#     # Download all the tiles
+#     download_tiles(tile_indices, "data/_temp", zoom)
+#
+#     # Stich together the tiles
+#     stitched_img = stitch_images("data/_temp")
+#
+#     # Crop the image down to a standard size
+#     cropped_img = centre_crop_image(stitched_img)
+#
+#     cropped_img.save(f"data/de/tiles/{str(i).zfill(9)}.png")
+#
+#     if i % 100 == 0:
+#         print(f"Finished {i}/{gdf_len}.")
 

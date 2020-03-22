@@ -98,23 +98,23 @@ for region in regions:
     try:
 
         # Launch tileserver container
-        # print(f"{time.strftime('%H:%M:%S', time.localtime())}: Building tileserver... ")
-        # import_container = client.containers.run(
-        #     "overv/openstreetmap-tile-server:latest",
-        #     ports={
-        #         "80/tcp": 8081
-        #     },
-        #     volumes={
-        #         "openstreetmap-data": {"bind": "/var/lib/postgresql/12/main", "mode": "rw"}
-        #     },
-        #     command="import",
-        #     environment={
-        #         "DOWNLOAD_PBF": regions[region]["pbf"],
-        #         "DOWNLOAD_POLY": regions[region]["poly"]
-        #     },
-        #     auto_remove=True
-        # )
-        # print(f"{time.strftime('%H:%M:%S', time.localtime())}: Import finished. ")
+        print(f"{time.strftime('%H:%M:%S', time.localtime())}: Building tileserver... ")
+        import_container = client.containers.run(
+            "overv/openstreetmap-tile-server:latest",
+            ports={
+                "80/tcp": 8081
+            },
+            volumes={
+                "openstreetmap-data": {"bind": "/var/lib/postgresql/12/main", "mode": "rw"}
+            },
+            command="import",
+            environment={
+                "DOWNLOAD_PBF": regions[region]["pbf"],
+                "DOWNLOAD_POLY": regions[region]["poly"]
+            },
+            auto_remove=True
+        )
+        print(f"{time.strftime('%H:%M:%S', time.localtime())}: Import finished. ")
         print(f"{time.strftime('%H:%M:%S', time.localtime())}: Running tileserver... ")
         tile_server = client.containers.run(
             "overv/openstreetmap-tile-server:latest",

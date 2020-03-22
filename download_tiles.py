@@ -57,7 +57,7 @@ def download_tiles(tile_indices, folder, zoom):
     for x, y in tile_indices:
         url = f"http://localhost:8081/tile/{zoom}/{x}/{y}.png"
         if not os.path.exists(f"{folder}/{x}/{y}.png"):
-            print(f"Requesting '{url}' ...", end="")
+            # print(f"Requesting '{url}' ...", end="")
             r = requests.get(url, stream=True)
             if r.status_code == 200:
                 img = Image.open(BytesIO(r.content))
@@ -65,9 +65,9 @@ def download_tiles(tile_indices, folder, zoom):
                 if not os.path.exists(f"{folder}/{y}"):
                     os.mkdir(f"{folder}/{y}")
                 img.save(f"{folder}/{y}/{x}.png")  # Save as row-col
-                print(" Success.")
+                # print(" Success.")
             else:
-                print(" Failure.")
+                print(f"Failure: '{url}'")
 
 
 def stitch_images(folder):
@@ -125,19 +125,22 @@ def stitch_images(folder):
     return stitched
 
 
-def centre_crop_image(img):
+def centre_crop_image(img, dim):
 
     # Crop the image to a fixed size from the centre
     # We want about squares of about 1000m on each side
-    crop_width, crop_height = window_length / m_per_pixel[zoom], window_length / m_per_pixel[zoom]
-    width, height = stitched_img.size
+    crop_width, crop_height = 1000 / 2.387, 1000 /2.387
+    width, height = img.size
     left = (width - crop_width) / 2
     top = (height - crop_height) / 2
     right = (width + crop_width) / 2
     bottom = (height + crop_height) / 2
 
     # Crop the center of the image
-    cropped_img = stitched_img.crop((left, top, right, bottom))
+    cropped_img = img.crop((left, top, right, bottom))
+
+    # Resize to desired dimensions
+    cropped_img.thumbnail((dim, dim))
 
     return cropped_img
 

@@ -1,6 +1,3 @@
-drop table if exists res;
-create table res as (
-
 	with building as (
 		select
 			osm_id,
@@ -27,11 +24,8 @@ create table res as (
 	)
 
 	select
-		geom,
-		numbuilding
+		ST_Envelope(ST_Buffer(geom, 500)) as geom
 	from
 		pois
 	where
 		numbuilding >= 50
-
-)

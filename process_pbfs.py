@@ -7,22 +7,22 @@ from download_tiles import *
 
 
 regions = {
-    # "BW": {"pbf": "https://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/baden-wuerttemberg.poly"},
-    # "BY": {"pbf": "https://download.geofabrik.de/europe/germany/bayern-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/bayern.poly"},
-    # "BE": {"pbf": "https://download.geofabrik.de/europe/germany/berlin-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/berlin.poly"},
-    # "BB": {"pbf": "https://download.geofabrik.de/europe/germany/brandenburg-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/brandenburg.poly"},
-    # "HB": {"pbf": "https://download.geofabrik.de/europe/germany/bremen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/bremen.poly"},
-    # "HH": {"pbf": "https://download.geofabrik.de/europe/germany/hamburg-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/hamburg.poly"},
-    # "HE": {"pbf": "https://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/hesse.poly"},
-    # "MV": {"pbf": "https://download.geofabrik.de/europe/germany/mecklenburg-vorpommern-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/mecklenburg-vorpommern.poly"},
-    # "NI": {"pbf": "https://download.geofabrik.de/europe/germany/niedersachsen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/niedersachsen.poly"},
-    # "NW": {"pbf": "https://download.geofabrik.de/europe/germany/nordrhein-westfalen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/nordrhein-westfalen.poly"},
-    # "RP": {"pbf": "https://download.geofabrik.de/europe/germany/rheinland-pfalz-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/rheinland-pfalz.poly"},
+    "BW": {"pbf": "https://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/baden-wuerttemberg.poly"},
+    "BY": {"pbf": "https://download.geofabrik.de/europe/germany/bayern-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/bayern.poly"},
+    "BE": {"pbf": "https://download.geofabrik.de/europe/germany/berlin-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/berlin.poly"},
+    "BB": {"pbf": "https://download.geofabrik.de/europe/germany/brandenburg-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/brandenburg.poly"},
+    "HB": {"pbf": "https://download.geofabrik.de/europe/germany/bremen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/bremen.poly"},
+    "HH": {"pbf": "https://download.geofabrik.de/europe/germany/hamburg-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/hamburg.poly"},
+    "HE": {"pbf": "https://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/hesse.poly"},
+    "MV": {"pbf": "https://download.geofabrik.de/europe/germany/mecklenburg-vorpommern-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/mecklenburg-vorpommern.poly"},
+    "NI": {"pbf": "https://download.geofabrik.de/europe/germany/niedersachsen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/niedersachsen.poly"},
+    "NW": {"pbf": "https://download.geofabrik.de/europe/germany/nordrhein-westfalen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/nordrhein-westfalen.poly"},
+    "RP": {"pbf": "https://download.geofabrik.de/europe/germany/rheinland-pfalz-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/rheinland-pfalz.poly"},
     "SL": {"pbf": "https://download.geofabrik.de/europe/germany/saarland-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/saarland.poly"},
-    # "SN": {"pbf": "https://download.geofabrik.de/europe/germany/sachsen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/sachsen.poly"},
-    # "ST": {"pbf": "https://download.geofabrik.de/europe/germany/sachsen-anhalt-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/sachsen-anhalt.poly"},
-    # "SH": {"pbf": "https://download.geofabrik.de/europe/germany/schleswig-holstein-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/schleswig-holstein.poly"},
-    # "TH": {"pbf": "https://download.geofabrik.de/europe/germany/thueringen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/thueringen.poly"},
+    "SN": {"pbf": "https://download.geofabrik.de/europe/germany/sachsen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/sachsen.poly"},
+    "ST": {"pbf": "https://download.geofabrik.de/europe/germany/sachsen-anhalt-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/sachsen-anhalt.poly"},
+    "SH": {"pbf": "https://download.geofabrik.de/europe/germany/schleswig-holstein-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/schleswig-holstein.poly"},
+    "TH": {"pbf": "https://download.geofabrik.de/europe/germany/thueringen-latest.osm.pbf", "poly": "http://download.geofabrik.de/europe/thueringen.poly"},
 #     "LX_TEST": {"pbf": "https://download.geofabrik.de/europe/luxembourg-latest.osm.pbf", "poly": "https://download.geofabrik.de/europe/france/luxembourg.poly"}
 }
 
@@ -82,6 +82,8 @@ step = 100
 tilesize = 256
 query_file = "sql/villages_towns_suburbs_with_more_than_50_buildings_nearby.sql"
 out_folder = "data/de/train"
+if not os.path.exists(out_folder):
+    os.mkdir(out_folder)
 
 for region in regions:
 
@@ -96,23 +98,23 @@ for region in regions:
     try:
 
         # Launch tileserver container
-        print(f"{time.strftime('%H:%M:%S', time.localtime())}: Building tileserver... ")
-        import_container = client.containers.run(
-            "overv/openstreetmap-tile-server:latest",
-            ports={
-                "80/tcp": 8081
-            },
-            volumes={
-                "openstreetmap-data": {"bind": "/var/lib/postgresql/12/main", "mode": "rw"}
-            },
-            command="import",
-            environment={
-                "DOWNLOAD_PBF": regions[region]["pbf"],
-                "DOWNLOAD_POLY": regions[region]["poly"]
-            },
-            auto_remove=True
-        )
-        print(f"{time.strftime('%H:%M:%S', time.localtime())}: Import finished. ")
+        # print(f"{time.strftime('%H:%M:%S', time.localtime())}: Building tileserver... ")
+        # import_container = client.containers.run(
+        #     "overv/openstreetmap-tile-server:latest",
+        #     ports={
+        #         "80/tcp": 8081
+        #     },
+        #     volumes={
+        #         "openstreetmap-data": {"bind": "/var/lib/postgresql/12/main", "mode": "rw"}
+        #     },
+        #     command="import",
+        #     environment={
+        #         "DOWNLOAD_PBF": regions[region]["pbf"],
+        #         "DOWNLOAD_POLY": regions[region]["poly"]
+        #     },
+        #     auto_remove=True
+        # )
+        # print(f"{time.strftime('%H:%M:%S', time.localtime())}: Import finished. ")
         print(f"{time.strftime('%H:%M:%S', time.localtime())}: Running tileserver... ")
         tile_server = client.containers.run(
             "overv/openstreetmap-tile-server:latest",
